@@ -1,0 +1,11 @@
+{
+    "roles": {
+        "Admin": "admin",
+        "User": "user"
+    },
+    "status": {
+        "Active": "active",
+        "Inactive": "inactive",
+        "Trial": "trial"
+    }
+}

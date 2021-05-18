@@ -1,8 +1,8 @@
 'use strict';
 
-import  bcrypt from bcryptjs;
+const  bcrypt = require('bcryptjs');
 import  { Model} from 'sequelize';
-import { v4 } from 'uuid';
+var uuid = require('uuid');
 
 module.exports = (sequelize, DataTypes) => {
 
@@ -45,7 +45,9 @@ module.exports = (sequelize, DataTypes) => {
     hooks: {
       beforeValidate: () => {},
       afterValidate: async user =>  {
+        console.log('validating')
         if(user.password) {
+          console.log('hasing')
           user.password = await bcrypt.hash(user.password, bcrypt.genSaltSync(8));
         }
       },
