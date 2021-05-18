@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     uuid: {
       type: DataTypes.UUID,     
-      defaultValue: v4()
+      defaultValue: uuid.v4()
     },
     username: {
       type: DataTypes.STRING,
@@ -41,22 +41,18 @@ module.exports = (sequelize, DataTypes) => {
     status: {      
       type: DataTypes.STRING,
       allowNull: false
-    },
-    hooks: {
-      beforeValidate: () => {},
-      afterValidate: async user =>  {
-        console.log('validating')
-        if(user.password) {
-          console.log('hasing')
-          user.password = await bcrypt.hash(user.password, bcrypt.genSaltSync(8));
-        }
-      },
-      beforeCreate: () => {},
-      afterCreate: () => {}
-    },
+    },    
   }, {
     sequelize,
     modelName: 'User',
+    hooks: {
+      // beforeValidate: () => {},
+      afterValidate: async user =>  {        
+        if(user.password) {          
+          user.password = await bcrypt.hash(user.password, bcrypt.genSaltSync(8));
+        }
+      }      
+    },
   });
 
   return User;  
