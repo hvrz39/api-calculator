@@ -4,6 +4,10 @@ import bcrypt, { compare } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import projectConfig from '../project.config.json';
 
+export const getAll = async criteria => {
+    return await db.User.findAll();
+}
+
 export const createUser = async user => {
     const { username, password, role, status } = user;
     const newUser = await db.User.create({
