@@ -5,7 +5,9 @@ import jwt from 'jsonwebtoken';
 import projectConfig from '../project.config.json';
 
 export const getAll = async criteria => {
-    return await db.User.findAll();
+    return await db.User.findAndCountAll({
+        ...criteria
+    });
 }
 
 export const createUser = async user => {

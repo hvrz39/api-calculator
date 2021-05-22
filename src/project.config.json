@@ -7,5 +7,6 @@
         "Active": "active",
         "Inactive": "inactive",
         "Trial": "trial"
-    }
+    },
+    "pageSize": 1
 }
