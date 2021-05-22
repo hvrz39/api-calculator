@@ -3,8 +3,9 @@ import { Op } from 'sequelize';
 import projectConfig from '../project.config.json';
 
 export const getAll = async (req, res) => {
-    try {        
-        const { sort, offset, limit } = req.query;
+    try {                
+        let { sort, offset, limit } = req.query;
+        limit = limit ?? 10;
         const perPage = offset ? limit * offset:  0;        
         const users = await userService.getAll({ 
                     order: [ 

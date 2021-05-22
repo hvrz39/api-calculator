@@ -2,9 +2,11 @@
 import db from '../models';
 import bcrypt, { compare } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { v4 }  from 'uuid';
 import projectConfig from '../project.config.json';
 
 export const getAll = async criteria => {
+    console.log({ criteria });
     return await db.User.findAndCountAll({
         ...criteria
     });
@@ -45,7 +47,22 @@ export const generateToken = async user => {
     const token = jwt.sign(
         { id, username, role, status }, 
         "SECRET", 
-        {  expiresIn: 86400 });
+        {  expiresIn: 86400 });    
+
+    db.UserToken.create({
+        user_id: id,      
+        uuid: v4(),
+        token
+    });
+
     return token;
+}
+
+export const removeToken = async userId => {
+    db.UserToken.destroy({
+        where: {
+            id: userId
+        }
+    });
 }
 export const comparePassword = async (password, receivedPassword) => await compare(password, receivedPassword);
