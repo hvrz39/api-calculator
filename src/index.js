@@ -4,7 +4,7 @@ const db = require('./models');
 
 db.sequelize
     .sync({
-        //force: true // enable only when a schema change as not reflected.
+        // force: true // enable only when a schema change as not reflected.
     })
     .then(() => {
         console.log('Connected to db...')
