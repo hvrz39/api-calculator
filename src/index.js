@@ -6,8 +6,7 @@ db.sequelize
     .sync({
         // force: true // enable only when a schema change as not reflected.
     })
-    .then(() => {
-        console.log('Connected to db...')
+    .then(() => {       
         app.listen(3000);
         console.log('Listenning...');
 })

@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'UserBalance',
-    paranoid: true
+    paranoid: true    
   });
   return UserBalance;
 };

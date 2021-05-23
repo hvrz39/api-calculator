@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import * as userController from '../controllers/user.controller';
 import { verifyToken, isAdmin } from '../middelwares/auth.jwt';
+import * as userBalanceController from '../controllers/userbalance.controller';
+
 
 const router = Router();
+
 const hasAccessAndAdmin = [verifyToken, isAdmin ];
 
-router.get('/', [], userController.getAll);
-router.get('/:id', [], userController.getById);
+router.post('/', [], userBalanceController.addUserBalance);
 
 export default router;

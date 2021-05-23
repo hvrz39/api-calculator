@@ -37,7 +37,11 @@ export const createUser = async user => {
 
 export const getById = async id => {
     try {
-        return  await db.User.findByPk(id);
+        return  await db.User.findByPk(id, 
+                                { include: 
+                                    [{ 
+                                        model: db.UserBalance                                        
+                                    }]});
    } catch(err) {
        throw('An error ocurred while retrieving a user');
    }

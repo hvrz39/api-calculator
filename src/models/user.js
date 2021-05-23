@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
      });
 
      User.hasMany(models.UserBalance, {      
-      foreignKey: 'user_id',
+      foreignKey: 'user_id'
      })
     }
   };

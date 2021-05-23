@@ -1,6 +1,5 @@
 import * as userService from '../services/user.service';
 import { Op } from 'sequelize';
-import projectConfig from '../project.config.json';
 
 export const getAll = async (req, res) => {
     try {                
@@ -24,5 +23,21 @@ export const getAll = async (req, res) => {
     } catch(err) {        
         console.log(err);
         res.status(500).json({ error: 'An error ocurred while retrieving Users.'});
+    }
+ }
+
+ export const getById = async (req, res) => {
+    try {                
+        const { id } = req.params;       
+        const user = await userService.getById(id);
+        if(!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        const { username, role, uuid, createdAt, updatedAt } = user;        
+        res.status(200).json(user);
+
+    } catch(err) {        
+        console.log(err);
+        res.status(500).json({ error: 'An error ocurred while retrieving a User.'});
     }
  }
