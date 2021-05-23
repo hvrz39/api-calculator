@@ -43,15 +43,17 @@ export const signin = async (req, res) => {
 
  export const logout = async (req, res) => {
     try {
-        const { id } = req.params;
-        if(!id) {
-            res.status(400).json({ error: 'No user was found.'})    
+        const { userId } = req.params;
+        const { token } = req.body;
+        if(!userId || !token) {
+            res.status(400).json({ error: 'No user or a token were not found.'})    
         }
 
-        userService.removeToken(id);
-        res.status(200).json({ message: 'User logout.'});
+        userService.removeToken(userId, token);
+        res.status(200).json({ message: 'User ended session.'});
 
     } catch(err) {
+        console.log(err);
         res.status(500).json({ error: 'An error ocurred while trying to logout.'});
     }
  }

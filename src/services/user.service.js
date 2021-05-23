@@ -5,11 +5,22 @@ import jwt from 'jsonwebtoken';
 import { v4 }  from 'uuid';
 import projectConfig from '../project.config.json';
 
-export const getAll = async criteria => {
-    console.log({ criteria });
+export const getAll = async criteria => {   
     return await db.User.findAndCountAll({
         ...criteria
     });
+    // return await db.User
+    //                 .findAndCountAll({ 
+    //                     include:  [{
+    //                         // all: true
+    //                         model: db.UserToken,
+    //                         limit: 1,
+    //                         order: [
+    //                             ['id', 'desc']
+    //                         ],
+    //                         attributes: ['token']
+    //                     }] 
+    //                 });
 }
 
 export const createUser = async user => {
@@ -58,11 +69,23 @@ export const generateToken = async user => {
     return token;
 }
 
-export const removeToken = async userId => {
+export const removeToken = async (user_id, token) => {
     db.UserToken.destroy({
         where: {
-            id: userId
+            user_id,
+            token
         }
     });
 }
+
+export const getUserToken = async (userId, token)  => {
+    try {
+        return await db.UserToken.findOne({ where: { user_id: userId, token } })
+    }
+    catch (err) {
+        console.log(err);
+        throw('An error ocurred while retrieving a user');
+    }
+}
+
 export const comparePassword = async (password, receivedPassword) => await compare(password, receivedPassword);

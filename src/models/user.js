@@ -14,10 +14,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.UserToken)
+      User.hasMany(models.UserToken, {      
+        foreignKey: 'user_id',
+     })
     }
   };
   User.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true // Automatically gets converted to SERIAL for postgres
+    },
     uuid: {
       type: DataTypes.UUID,     
       defaultValue: uuid.v4()

@@ -11,10 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      UserToken.belongsTo(models.User)
     }
   };
   UserToken.init({
-    user_id: DataTypes.INTEGER,
+    user_id: {
+      type:DataTypes.INTEGER,      
+    },
     uuid: DataTypes.UUID,
     token: DataTypes.STRING
   }, {
