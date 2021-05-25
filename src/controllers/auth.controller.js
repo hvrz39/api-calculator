@@ -18,13 +18,14 @@ export const signin = async (req, res) => {
             return;
         }
         
-        const token = await userService.generateToken(user);
+        const access_token = await userService.generateToken(user);
         const { id, role, status } = user;
         res.status(200).json({ 
             id,
             role, 
             status, 
-            token 
+            access_token,
+            expiresIn: 86400 
         });
 
     } catch(err) {        

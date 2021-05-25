@@ -59,7 +59,7 @@ export const searchBy = async criteria => {
 
 export const generateToken = async user => {
     const { id, username, role, status } = user;
-    const token = jwt.sign(
+    const access_token = jwt.sign(
         { id, username, role, status }, 
         "SECRET", 
         {  expiresIn: 86400 });    
@@ -67,10 +67,10 @@ export const generateToken = async user => {
     db.UserToken.create({
         user_id: id,      
         uuid: v4(),
-        token
+        access_token
     });
 
-    return token;
+    return access_token;
 }
 
 export const removeToken = async (user_id, token) => {
