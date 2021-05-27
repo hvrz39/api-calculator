@@ -7,6 +7,8 @@ const router = Router();
 
 const hasAccessAndAdmin = [verifyToken, isAdmin ];
 
+router.get('/', [], userBalanceController.getAllUserBalance);
 router.post('/', [], userBalanceController.addUserBalance);
+router.get('/:id', [], userBalanceController.getUserBalance);
 
 export default router;

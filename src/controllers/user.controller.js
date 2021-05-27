@@ -15,7 +15,8 @@ export const getAll = async (req, res) => {
                     where: { 
                         username: {
                             [Op.startsWith]: `%@%`
-                        }}
+                        }
+                    }
                 });
         
         res.status(200).json(users);
