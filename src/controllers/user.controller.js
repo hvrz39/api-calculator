@@ -45,7 +45,8 @@ export const getAll = async (req, res) => {
  }
 
  export const create = async (req, res) => {
-    try {        
+    try {      
+        console.log('payload', req.body)  
         const user = await userService.createUser(req.body);        
         res.status(201).json(user);
     } catch(err) {        
@@ -80,6 +81,34 @@ export const getAll = async (req, res) => {
         });
 
         res.status(200).json(response);
+    } catch(err) {        
+        console.log(err);
+        res.status(500).json({ error: e`An error ocurred while trying to update an User.` })
+    }
+ }
+
+ export const remove = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const notFoundMessage = `User not found.`;
+        if(!id) {
+            res.status(404).json({ error: notFoundMessage });
+        }
+
+        const existingUser = userService.getById(id);
+        if(!existingUser) {
+            res.status(404).json({ error: notFoundMessage });
+        }
+
+        const { username, role, status, } = req.body;
+
+        const response = await db.User.destroy({
+            where: {
+                id
+            }
+        });
+
+        res.status(204).json(response);
     } catch(err) {        
         console.log(err);
         res.status(500).json({ error: e`An error ocurred while trying to update an User.` })

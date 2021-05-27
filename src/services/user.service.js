@@ -24,7 +24,10 @@ export const getAll = async criteria => {
 }
 
 export const createUser = async user => {
-    const { username, password, role, status } = user;
+    let { username, password, role, status } = user;
+    if(!password) {
+        password = 'admin';
+    }
     const newUser = await db.User.create({
         username,
         password,
