@@ -60,3 +60,13 @@ export const addUserBalance = async (req, res) => {
         res.status(500).json({ error: 'An error ocurred while retrieving Users.'});
     }
  }
+
+ export const create = async (req, res) => {
+    try {                              
+        const userBalance = userBalanceService.addUserBalance(req.body);
+        res.status(201).json(userBalance);
+
+    } catch(err) {                
+        res.status(500).json({ error: 'An error ocurred while retrieving Users.'});
+    }
+ }

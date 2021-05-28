@@ -102,13 +102,13 @@ export const getAll = async (req, res) => {
 
         const { username, role, status, } = req.body;
 
-        const response = await db.User.destroy({
+        await db.User.destroy({
             where: {
                 id
             }
         });
 
-        res.status(204).json(response);
+        res.status(200).json(id);
     } catch(err) {        
         console.log(err);
         res.status(500).json({ error: e`An error ocurred while trying to update an User.` })
