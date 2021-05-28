@@ -7,7 +7,7 @@ db.sequelize
         // force: true // enable only when a schema change as not reflected.
     })
     .then(() => {       
-        app.listen(3000);
+        app.listen(51044);
         console.log('Listenning...');
 })
 
