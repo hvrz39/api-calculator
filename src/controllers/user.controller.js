@@ -88,16 +88,10 @@ export const getAll = async (req, res) => {
         if(!existingUser) {
             res.status(404).json({ error: notFoundMessage });
         }
-
-        const { username, role, status, } = req.body;
-
-        await db.User.destroy({
-            where: {
-                id
-            }
-        });
-
+        
+        await userService.remove(id);
         res.status(200).json(id);
+        
     } catch(err) {        
         console.log(err);
         res.status(500).json({ error: e`An error ocurred while trying to update an User.` })

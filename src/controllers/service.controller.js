@@ -69,3 +69,20 @@ export const getAll = async (req, res) => {
         res.status(500).json({ error: 'An error ocurred while retrieving a Service.'});
     }
  }
+
+ export const remove = async (req, res) => {
+    try {                
+        const { id } = req.params;       
+        const existingService = await service.getById(id);
+
+        if(!existingService) {
+            return res.status(404).json({ error: 'Service not found.' });
+        }        
+
+        await service.remove(id);
+        res.status(200).json(id);
+    } catch(err) {        
+        console.log(err);
+        res.status(500).json({ error: 'An error ocurred while retrieving a Service.'});
+    }
+ }

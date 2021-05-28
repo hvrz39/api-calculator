@@ -23,3 +23,10 @@ export const update = async (id, { type, cost, status }) =>
             id
         }
     });
+
+export const remove = async id => 
+    await db.Service.destroy({
+        where: {
+            id
+        }
+    });

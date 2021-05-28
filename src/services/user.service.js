@@ -96,6 +96,14 @@ export const removeToken = async (user_id, token) => {
     });
 }
 
+export const remove = async id => 
+            await db.User.destroy({
+                where: {
+                    id
+                }
+            });
+
+
 export const getUserToken = async (userId, token)  => {
     try {
         return await db.UserToken.findOne({ where: { user_id: userId, token } })
