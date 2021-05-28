@@ -8,3 +8,6 @@ export const getAll = async criteria => {
         ...criteria
     });
 }
+
+
+export const create = async service => await db.Service.create(service) ;

@@ -10,6 +10,6 @@ const hasAccessAndAdmin = [verifyToken, isAdmin ];
 router.get('/', [], serviceController.getAll);
 // router.post('/', [], userBalanceController.addUserBalance);
 // router.get('/:id', [], userBalanceController.getUserBalance);
-// router.post('/', [], userBalanceController.create);
+ router.post('/', [], serviceController.create);
 
 export default router;

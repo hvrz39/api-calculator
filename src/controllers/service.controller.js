@@ -26,3 +26,13 @@ export const getAll = async (req, res) => {
         res.status(500).json({ error: 'An error ocurred while retrieving Users.'});
     }
  }
+
+ export const create = async (req, res) => {
+    try {             
+        const newService = await service.create(req.body);        
+        res.status(201).json(newService);
+    } catch(err) {        
+        console.log(err);
+        res.status(500).json({ error: 'An error ocurred while trying to create a Service.'});
+    }
+ }
