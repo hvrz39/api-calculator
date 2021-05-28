@@ -38,6 +38,17 @@ export const createUser = async user => {
     return newUser;
 }
 
+export const update = async (id, { username, role, status }) => 
+    await db.User.update({ 
+        username,
+        role,
+        status
+    }, {
+        where: {
+            id
+        }
+    });
+
 export const getById = async id => {
     try {
         return  await db.User.findByPk(id, 

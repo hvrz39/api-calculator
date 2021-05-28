@@ -6,7 +6,7 @@ const router = Router();
 const hasAccessAndAdmin = [verifyToken, isAdmin ];
 
 router.get('/', [], serviceController.getAll);
- //router.post('/', [], serviceController.addUserBalance);
+router.put('/:id', [], serviceController.update);
  router.get('/:id', [], serviceController.getById);
  router.post('/', [], serviceController.create);
 

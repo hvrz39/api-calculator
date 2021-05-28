@@ -12,3 +12,14 @@ export const getAll = async criteria =>
 export const create = async service => await db.Service.create(service) ;
 
 export const getById = async id => await db.Service.findByPk(id);
+
+export const update = async (id, { type, cost, status }) => 
+    await db.Service.update({ 
+        type,
+        cost,
+        status
+    }, {
+        where: {
+            id
+        }
+    });
