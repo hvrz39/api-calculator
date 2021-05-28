@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+const uuid = require('uuid');
 module.exports = (sequelize, DataTypes) => {
   class Service extends Model {
     
@@ -9,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   Service.init({
     uuid: {
-      type: DataTypes.UUID
+      type: DataTypes.UUID,
+      defaultValue: uuid.v4()
     },
     type: {
       type: DataTypes.STRING,

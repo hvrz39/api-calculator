@@ -36,3 +36,18 @@ export const getAll = async (req, res) => {
         res.status(500).json({ error: 'An error ocurred while trying to create a Service.'});
     }
  }
+
+ export const getById = async (req, res) => {
+    try {                
+        const { id } = req.params;       
+        const existingService = await service.getById(id);
+
+        if(!existingService) {
+            return res.status(404).json({ error: 'Service not found.' });
+        }        
+        res.status(200).json(existingService);
+    } catch(err) {        
+        console.log(err);
+        res.status(500).json({ error: 'An error ocurred while retrieving a Service.'});
+    }
+ }
