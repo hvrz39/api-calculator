@@ -1,22 +1,18 @@
 'use strict';
 const {  Model} = require('sequelize');
 const uuid = require('uuid');
+import db from './';
 module.exports = (sequelize, DataTypes) => {
   class Record extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      // Record.belongsToMany(models.User, {
-      //   foreignKey: 'user_id'
-      // })
+    
+    static associate(models) {      
+      Record.belongsTo(models.User, {
+        foreignKey: 'user_id'
+      })
 
-      // Record.belongsToMany(models.Service, {
-      //   foreignKey: 'service_id'
-      // })
+      Record.belongsTo(models.Service, {
+        foreignKey: 'service_id'
+      })
     }
   };
   Record.init({
