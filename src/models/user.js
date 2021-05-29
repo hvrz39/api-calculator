@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
      User.hasMany(models.UserBalance, {      
       foreignKey: 'user_id',
-       as: 'balances'
+       //as: 'balances'
      })
 
      User.hasMany(models.Record, {

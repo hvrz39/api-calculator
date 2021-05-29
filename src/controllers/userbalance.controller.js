@@ -1,5 +1,6 @@
 import * as userBalanceService from '../services/userbalance.service';
 import db from '../models';
+import { orderArray } from '../common/utils';
 
 export const addUserBalance = async (req, res) => {
     try {                                
@@ -28,35 +29,27 @@ export const addUserBalance = async (req, res) => {
         limit = limit ?? 10;
         const perPage = offset ? limit * offset:  0; 
 
-        const userBalance = await userBalanceService.getAll({
-            order: [ 
-                [sort ? sort.split(' ') : ['username', 'desc']]
-            ],
+        sort = sort ? sort.split(' ') : ['username', 'desc'];
+        const userBalance = await userBalanceService.getAll({            
             limit,
             offset: perPage,
             attributes: ['username', 'role'],
-                        include:  [{
-                            // all: true
-                            model: db.UserBalance,
-                            limit: 1,
-                            order: [
-                                ['id', 'desc'],
-                            ],
-                            attributes: ['balance']
-                        }] 
+            include:  [{                            
+                model: db.UserBalance,
+                limit: 1,
+                order: [
+                    ['id', 'desc'],
+                ],
+                attributes: ['balance']
+            }] 
         });
+       
         const { rows, count } = userBalance;
-        const userBalances = rows.map((r) => {        
-            const { id, username, role, UserBalances } = r.dataValues;
-            const balance = UserBalances.length > 0 
-                            ? UserBalances[0].dataValues.balance
-                            : 0;            
-            return { id, username, role, balance }
-        });
-        
-        res.status(200).json({ rows: userBalances, count });
+        const userBalances = fixUserBalance(rows);
+        res.status(200).json({ rows: orderArray(userBalances, sort[0], sort[1]), count });
 
-    } catch(err) {                
+    } catch(err) { 
+        console.log(err)               
         res.status(500).json({ error: 'An error ocurred while retrieving Users.'});
     }
  }
@@ -70,3 +63,11 @@ export const addUserBalance = async (req, res) => {
         res.status(500).json({ error: 'An error ocurred while retrieving Users.'});
     }
  }
+
+ const fixUserBalance = rows => rows.map((r) => {        
+    const { id, username, role, UserBalances } = r.dataValues;
+    const balance = UserBalances.length > 0 
+                    ? UserBalances[0].dataValues.balance
+                    : 0;            
+    return { id, username, role, balance }
+});
