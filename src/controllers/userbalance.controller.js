@@ -34,6 +34,7 @@ export const addUserBalance = async (req, res) => {
             limit,
             offset: perPage,
             attributes: ['username', 'role'],
+            // gets the last user balance
             include:  [{                            
                 model: db.UserBalance,
                 limit: 1,
