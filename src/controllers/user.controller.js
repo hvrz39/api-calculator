@@ -1,6 +1,5 @@
 import * as userService from '../services/user.service';
 import { Op } from 'sequelize';
-import db from '../models';
 
 export const getAll = async (req, res) => {
     try {                
@@ -34,8 +33,7 @@ export const getAll = async (req, res) => {
         const user = await userService.getById(id);
         if(!user) {
             return res.status(404).json({ error: 'User not found' });
-        }
-        // const { username, role, uuid, createdAt, updatedAt } = user;        
+        }        
         res.status(200).json(user);
 
     } catch(err) {        
@@ -45,8 +43,7 @@ export const getAll = async (req, res) => {
  }
 
  export const create = async (req, res) => {
-    try {      
-        console.log('payload', req.body)  
+    try {             
         const user = await userService.createUser(req.body);        
         res.status(201).json(user);
     } catch(err) {        
