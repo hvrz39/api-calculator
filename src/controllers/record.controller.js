@@ -49,3 +49,39 @@ export const getAll = async (req, res) => {
         res.status(500).json({ error: 'An error ocurred while retrieving a Record.'});
     }
  }
+
+ export const update = async (req, res) => {
+    try {                
+        const { id } = req.params;       
+        const existingRecord = await recordService.getById(id);
+
+        if(!existingRecord) {
+            return res.status(404).json({ error: 'Record not found.' });
+        }     
+        
+        const response = await recordService.update(id, req.body);
+        res.status(200).json(response);
+
+    } catch(err) {        
+        console.log(err);
+        res.status(500).json({ error: 'An error ocurred while uddating a Record.'});
+    }
+ }
+
+ export const remove = async (req, res) => {
+    try {  
+        console.log('params', req.params)              
+        const { id } = req.params;       
+        const existingRecord = await recordService.getById(id);
+
+        if(!existingRecord) {
+            return res.status(404).json({ error: 'Record not found.' });
+        }        
+
+        await recordService.remove(id);
+        res.status(200).json(id);
+    } catch(err) {        
+        console.log(err);
+        res.status(500).json({ error: 'An error ocurred while deleting a Record.', err});
+    }
+ }

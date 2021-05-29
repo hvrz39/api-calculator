@@ -24,6 +24,7 @@ export const signin = async (req, res) => {
             id,
             role, 
             status, 
+            username,
             access_token,
             expiresIn: 86400 
         });

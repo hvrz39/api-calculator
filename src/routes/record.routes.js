@@ -6,9 +6,8 @@ const router = Router();
 const hasAccessAndAdmin = [verifyToken, isAdmin ];
 
 router.get('/', [], recordController.getAll);
-// router.put('/:id', [], serviceController.update);
- router.get('/:id', [], recordController.getById);
-// router.post('/', [], serviceController.create);
-// router.delete('/:id', [], serviceController.remove);
+router.put('/:id', [], recordController.update);
+router.get('/:id', [], recordController.getById);
+router.delete('/:id', [], recordController.remove);
 
 export default router;
