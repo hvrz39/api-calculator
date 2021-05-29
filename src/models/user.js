@@ -12,10 +12,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.UserToken, {      
         foreignKey: 'user_id',
+        as: 'token'
      });
 
      User.hasMany(models.UserBalance, {      
-      foreignKey: 'user_id'
+      foreignKey: 'user_id',
+       as: 'balances'
+     })
+
+     User.hasMany(models.Record, {
+       foreignKey: 'user_id'
      })
     }
   };
@@ -52,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
     },    
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'User',
     hooks: {
       // beforeValidate: () => {},
