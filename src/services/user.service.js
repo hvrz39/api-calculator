@@ -81,7 +81,7 @@ export const generateToken = async user => {
     db.UserToken.create({
         user_id: id,      
         uuid: v4(),
-        access_token
+        token: access_token
     });
 
     return access_token;

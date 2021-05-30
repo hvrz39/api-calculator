@@ -6,7 +6,8 @@ import  {
     userRoutes,
     userBalanceRoutes,
     serviceRoutes,
-    recordRoutes
+    recordRoutes,
+    myRecordRoutes
 } from './routes';
 
 const app = express();
@@ -21,6 +22,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/userbalances', userBalanceRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/records', recordRoutes);
+app.use('/api/myrecords', myRecordRoutes);
 
 export default app;
 

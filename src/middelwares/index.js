@@ -1,3 +1,9 @@
-import * as authJwt from "./authJwt";
+import * as authJwt from "./auth.jwt";
+const hasAccessAndAdmin = [authJwt.verifyToken, authJwt.isAdmin ];
+const hasAccessAndUser  = [authJwt.verifyToken, authJwt.isUser ];
 
-export { authJwt };
+export { 
+    authJwt, 
+    hasAccessAndAdmin,
+    hasAccessAndUser 
+};

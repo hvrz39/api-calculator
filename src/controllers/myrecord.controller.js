@@ -3,6 +3,8 @@ import db from '../models';
 
 export const getAll = async (req, res) => {
     try {                
+        const { userId } = req;
+
         let { sort, offset, limit } = req.query;
         limit = limit ?? 10;
         const perPage = offset ? limit * offset:  0;             
@@ -32,7 +34,10 @@ export const getAll = async (req, res) => {
                     model: db.Service,
                     require: true,
                     attributes: ['type']
-                }] 
+                }],
+            where: {
+                user_id: userId
+            }
         }
         const records = await recordService.getAll(criteria);       
         res.status(200).json(records);
