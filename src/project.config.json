@@ -8,5 +8,42 @@
         "Inactive": "inactive",
         "Trial": "trial"
     },
-    "pageSize": 1
+    "pageSize": 1,
+    "menuSettings": [
+        {
+            "path": "users",
+            "name": "Users",
+            "roles": ["admin"]
+        },
+        {
+            "path": "balances",
+            "name": "Balances",
+            "roles": ["admin"]
+        },
+        {
+            "path": "services",
+            "name": "Services",
+            "roles": ["admin"]
+        },
+        {
+            "path": "records",
+            "name": "Records",
+            "roles": ["admin"]
+        },
+        {
+            "path": "myrecords",
+            "name": "My records",
+            "roles": ["user"]
+        },
+        {
+            "path": "newservice",
+            "name": "New Service",
+            "roles": ["user"]
+        },
+        {
+            "path": "profile",
+            "name": "Profile",
+            "roles": ["admin","user"]
+        }
+    ]
 }

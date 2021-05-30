@@ -1,4 +1,5 @@
 import * as userService from '../services/user.service';
+import projectConfig from '../project.config.json'
 
 export const signin = async (req, res) => {
     try {
@@ -19,14 +20,15 @@ export const signin = async (req, res) => {
         }
         
         const access_token = await userService.generateToken(user);
-        const { id, role, status } = user;
+        const { id, role, status } = user;        
         res.status(200).json({ 
             id,
             role, 
             status, 
             username,
             access_token,
-            expiresIn: 86400 
+            expiresIn: 86400 ,
+            menuSettings: projectConfig.menuSettings.filter(s=> s.roles.indexOf(role) >= 0).map(({ path, name  }) => ({ menu: path, name }))
         });
 
     } catch(err) {        
