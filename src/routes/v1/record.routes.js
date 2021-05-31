@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { verifyToken, isAdmin } from '../middelwares/auth.jwt';
-import * as recordController from '../controllers/record.controller';
+import { verifyToken, isAdmin } from '../../middelwares/auth.jwt';
+import * as recordController from '../../controllers/record.controller';
 const router = Router();
 
 const hasAccessAndAdmin = [verifyToken, isAdmin ];

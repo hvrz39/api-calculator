@@ -1,7 +1,7 @@
 import { Router } from 'express';
 // import { verifyToken, isAdmin } from '../middelwares/auth.jwt';
-import { hasAccessAndAdmin } from '../middelwares';
-import * as userBalanceController from '../controllers/userbalance.controller';
+import { hasAccessAndAdmin } from '../../middelwares';
+import * as userBalanceController from '../../controllers/userbalance.controller';
 
 
 const router = Router();

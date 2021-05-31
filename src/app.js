@@ -9,10 +9,9 @@ import  {
     recordRoutes,
     myRecordRoutes,
     operationRoutes
-} from './routes';
+} from './routes/v1';
 
 const app = express();
-
 
 app.use(morgan("dev"));
 app.use(express.json());
