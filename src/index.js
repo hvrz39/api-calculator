@@ -17,7 +17,7 @@ db.sequelize
     })
     .then(() => {       
         app.listen(port);
-        console.log(`Listenning on port ${port}...`);
+        console.log(`Listenning on  port ${port}...`);
 })
 
 
