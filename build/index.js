@@ -2,9 +2,10 @@
 
 var _app = _interopRequireDefault(require("./app"));
 
+require("@babel/polyfill");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-// this his the 
 var db = require('./models');
 
 var port = process.env.PORT || 51044;

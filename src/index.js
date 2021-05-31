@@ -1,5 +1,7 @@
 
-import app from './app'; // this his the 
+import app from './app'; 
+import '@babel/polyfill';
+
 const db = require('./models');
 const port = process.env.PORT || 51044;
 const swaggerJsDoc = require("swagger-jsdoc");
