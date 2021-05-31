@@ -1,5 +1,5 @@
 
-import app from './app';
+import app from './app'; // this his the issue
 const db = require('./models');
 const port = process.env.PORT || 51044;
 const swaggerJsDoc = require("swagger-jsdoc");
