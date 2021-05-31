@@ -26,3 +26,8 @@ export const remove = async id =>
             id
         }
     });
+
+    export const getCost = async type => await db.Service.findOne({ 
+        where: { type },
+        attributes: ['id', 'cost']
+    });

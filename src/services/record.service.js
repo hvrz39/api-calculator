@@ -47,3 +47,6 @@ export const remove = async id =>
             id
         }
     });
+
+
+export const create = async record => await db.Record.create(record);
