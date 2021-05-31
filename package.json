@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js --exec babel-node",
     "build": "babel src/index.js --out-dir build",
-    "start": "node src/index.js"
+    "start": "node build/index.js"
   },
   "author": "Horacio Romero",
   "license": "ISC",
