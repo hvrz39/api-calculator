@@ -9,12 +9,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js --exec babel-node",
-    "build": "babel src/index.js --out-dir build",
+    "build": "babel src --out-dir build",
     "start": "node build/index.js"
   },
   "author": "Horacio Romero",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
