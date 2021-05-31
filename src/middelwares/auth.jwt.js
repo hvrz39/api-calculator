@@ -13,7 +13,7 @@ export const verifyToken = async (req, res, next) => {
         if(!userToken) {
             res.status(403).json({ error: `User not found, no token found. ${id} ${token}` });
         }    
-        //console.log(`USER ID =>  ${id}`);
+        
         req.userId = id;
         req.role = role;    
         next();

@@ -78,7 +78,7 @@ export const getAll = async (req, res) => {
 
  export const remove = async (req, res) => {
     try {  
-        console.log('params', req.params)              
+                
         const { id } = req.params;       
         const existingRecord = await recordService.getById(id);
 
