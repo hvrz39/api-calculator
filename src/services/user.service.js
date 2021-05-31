@@ -1,26 +1,14 @@
 
 import db from '../models';
-import bcrypt, { compare } from 'bcryptjs';
+import { compare } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { v4 }  from 'uuid';
-import projectConfig from '../project.config.json';
+import config from '../config';
 
 export const getAll = async criteria => {   
     return await db.User.findAndCountAll({
         ...criteria
-    });
-    // return await db.User
-    //                 .findAndCountAll({ 
-    //                     include:  [{
-    //                         // all: true
-    //                         model: db.UserToken,
-    //                         limit: 1,
-    //                         order: [
-    //                             ['id', 'desc']
-    //                         ],
-    //                         attributes: ['token']
-    //                     }] 
-    //                 });
+    });   
 }
 
 export const createUser = async user => {
@@ -75,7 +63,7 @@ export const generateToken = async user => {
     const { id, username, role, status } = user;
     const access_token = jwt.sign(
         { id, username, role, status }, 
-        "SECRET", 
+        config.secret, 
         {  expiresIn: 86400 });    
 
     db.UserToken.create({

@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import * as userService from '../services/user.service';
+import  config from '../config';
 
 export const verifyToken = async (req, res, next) => {
     try {
@@ -7,8 +8,7 @@ export const verifyToken = async (req, res, next) => {
         if(!token) {
             res.status(403).json("No token provided");
         }    
-
-        const { id, role } = jwt.verify(token, 'SECRET');                   
+        const { id, role } = jwt.verify(token, config.secret);                   
         const userToken = await userService.getUserToken(id, token);                
         if(!userToken) {
             res.status(403).json({ error: `User not found, no token found. ${id} ${token}` });
