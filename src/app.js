@@ -1,6 +1,10 @@
 import express from 'express';
 import morgan from "morgan"; 
 import cors from 'cors';
+// const swaggerJsDoc = require("swagger-jsdoc");
+// const swaggerUi = require("swagger-ui-express");
+const path = require('path');
+
 import  {
     authRoutes,
     userRoutes,

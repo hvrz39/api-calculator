@@ -1,0 +1,150 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "LoanPro Arithmetic API",
+      "description": "Arithmetic Operations API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:51044",
+    "basePath": "/v1",
+    "tags": [
+      {
+        "name": "ArithmeticAPO",
+        "description": "API for arithmethic operations"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+      "/auth": {
+        "post": {
+          "tags": ["Auth"],
+          "description": "Results",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "username": "Add",
+              "in": "body",
+              "description": "User authentication",
+              "schema": {
+                "$ref": "#/definitions/Add"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Result",
+              "schema": {
+                "$ref": "#/definitions/FullResult"
+              }
+            }
+          }
+        }
+      },
+      "/singout": {
+        "post": {
+          "tags": ["Auth"],
+          "description": "User signout",
+          
+          "produces": ["application/json"],
+          "responses": {
+            "201": {
+              "description": "Result",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            }
+          }
+        }
+      },
+      "/myrecords/{a}": {
+        "parameters": [
+          {
+            "name": "a",
+            "in": "path",
+            "required": true,
+            "description": "Retrieves all records associdated with a User",
+            "type": "integer"
+          }
+        ],
+        "get": {
+          "tags": ["MyRecords"],
+          "description": "Multiply the entered value by 2",
+          "produces": ["application/json"],
+          "responses": {
+            "201": {
+              "description": "Result",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            }
+          }
+        }
+      },
+      "/myrecords/{s}": {
+        "parameters": [
+          {
+            "name": "s",
+            "in": "path",
+            "required": true,
+            "description": "Retrieves a record associdated with a User",
+            "type": "integer"
+          }
+        ],
+        "get": {
+          "tags": ["Records"],
+          "description": "Gets all records from all users",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Result",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Results": {
+        "type": "array",
+        "$ref": "#/definitions/FullResult"
+      },
+      "Add": {
+        "required": ["username", "password"],
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Result": {
+        "type": "number"
+      },
+      "FullResult": {
+        "required": ["result", "name", "operation", "result"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "access_token": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+  
