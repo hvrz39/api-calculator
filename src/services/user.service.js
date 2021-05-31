@@ -3,7 +3,7 @@ import db from '../models';
 import { compare } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { v4 }  from 'uuid';
-import config from '../config';
+import config from '../app.config';
 
 export const getAll = async criteria => {   
     return await db.User.findAndCountAll({

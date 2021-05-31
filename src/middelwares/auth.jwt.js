@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import * as userService from '../services/user.service';
-import  config from '../config';
+import  config from '../app.config';
 
 export const verifyToken = async (req, res, next) => {
     try {
