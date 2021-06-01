@@ -1,9 +1,11 @@
 import * as recordService from '../services/record.service';
 import db from '../models';
+import { Op } from 'sequelize';
 
 export const getAll = async (req, res) => {
     try {                
-        let { sort, offset, limit } = req.query;
+        let { sort, offset, limit, search } = req.query;
+        search = search ?? '';
         limit = limit ?? 10;
         const perPage = offset ? limit * offset:  0;             
         
@@ -32,7 +34,15 @@ export const getAll = async (req, res) => {
                     model: db.Service,
                     require: true,
                     attributes: ['type']
-                }] 
+            }],
+            where: { 
+                [Op.or]: [
+                    { cost:  isNaN(search) ? null : parseFloat(search) },  
+                    { user_balance:  isNaN(search) ? null : parseFloat(search) },  
+                    { service_response: { [Op.startsWith]: `%${search}%` }},
+                                     
+                ]
+            }  
         }
         const records = await recordService.getAll(criteria);       
         res.status(200).json(records);

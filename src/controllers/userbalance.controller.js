@@ -1,6 +1,7 @@
 import * as userBalanceService from '../services/userbalance.service';
 import db from '../models';
 import { orderArray } from '../common/utils';
+import { Op } from 'sequelize';
 
 export const addUserBalance = async (req, res) => {
     try {                                
@@ -19,20 +20,21 @@ export const addUserBalance = async (req, res) => {
         res.status(200).json(userBalance ?? { user_id: id, balance: 0 });
      }
      catch(err) {
-         res.status(500).json({ error: 'not able to retrieve user balance'})
+         res.status(500).json({ error: 'Not able to retrieve User Balance'})
      }
  }
 
  export const getAllUserBalance = async (req, res) => {
     try {                              
-        let { sort, offset, limit } = req.query;
+        let { sort, offset, limit, search } = req.query;
         limit = limit ?? 10;
+        search = search ?? '';
         const perPage = offset ? limit * offset:  0; 
-
         sort = sort ? sort.split(' ') : ['username', 'desc'];
+
         const userBalance = await userBalanceService.getAll({            
             limit,
-            offset: perPage,
+            offset: perPage,         
             attributes: ['username', 'role'],
             // gets the last user balance
             include:  [{                            
@@ -41,8 +43,19 @@ export const addUserBalance = async (req, res) => {
                 order: [
                     ['id', 'desc'],
                 ],
-                attributes: ['balance']
-            }] 
+                attributes: ['balance'],  
+                where: { 
+                    [Op.or]: [                      
+                        { balance:  isNaN(search) ? null : parseFloat(search) },                      
+                    ]
+                }              
+            }],
+            where: { 
+                    [Op.or]: [
+                        { username: { [Op.startsWith]: `${search}%` }},
+                        { role:  { [Op.startsWith]: `${search}%` }},
+                    ]
+                } 
         });
        
         const { rows, count } = userBalance;
@@ -51,7 +64,7 @@ export const addUserBalance = async (req, res) => {
 
     } catch(err) { 
         console.log(err)               
-        res.status(500).json({ error: 'An error ocurred while retrieving Users.'});
+        res.status(500).json({ error: 'An error ocurred while retrieving Users  Balance.'});
     }
  }
 
@@ -61,7 +74,7 @@ export const addUserBalance = async (req, res) => {
         res.status(201).json(userBalance);
 
     } catch(err) {                
-        res.status(500).json({ error: 'An error ocurred while retrieving Users.'});
+        res.status(500).json({ error: 'An error ocurred while retrieving User Balance.'});
     }
  }
 
