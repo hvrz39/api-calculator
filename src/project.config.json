@@ -39,11 +39,6 @@
             "path": "newservice",
             "name": "New Service",
             "roles": ["user"]
-        },
-        {
-            "path": "profile",
-            "name": "Profile",
-            "roles": ["admin","user"]
         }
     ]
 }

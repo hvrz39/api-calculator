@@ -3,8 +3,9 @@ import { Op } from 'sequelize';
 
 export const getAll = async (req, res) => {
     try {                
-        let { sort, offset, limit } = req.query;
+        let { sort, offset, limit, search } = req.query;
         limit = limit ?? null;
+        search = search ?? '';
         const perPage = offset ? limit * offset:  0;        
         const users = await userService.getAll({ 
                     order: [ 
@@ -13,9 +14,11 @@ export const getAll = async (req, res) => {
                     limit,
                     offset: perPage,
                     where: { 
-                        username: {
-                            [Op.startsWith]: `%@%`
-                        }
+                        [Op.or]: [
+                            { username: { [Op.startsWith]: `${search}%` }},
+                            { role: { [Op.startsWith]: `${search}%` }},
+                            { status: { [Op.startsWith]: `${search}%` }}
+                        ]
                     }
                 });
         

@@ -3,7 +3,8 @@ import { Op } from 'sequelize';
 
 export const getAll = async (req, res) => {
     try {                
-        let { sort, offset, limit } = req.query;
+        let { sort, offset, limit, search } = req.query;
+        search = search ?? '';
         limit = limit ?? null;
         const perPage = offset ? limit * offset:  0;        
         const users = await service.getAll({ 
@@ -12,11 +13,13 @@ export const getAll = async (req, res) => {
                     ],
                     limit,
                     offset: perPage,
-                    // where: { 
-                    //     username: {
-                    //         [Op.startsWith]: `%@%`
-                    //     }
-                    // }
+                    where: { 
+                        [Op.or]: [
+                            { type: { [Op.startsWith]: `${search}%` }},
+                            { cost:  isNaN(search) ? null : parseFloat(search) },
+                            { status: { [Op.startsWith]: `${search}%` }}
+                        ]
+                    }
                 });
         
         res.status(200).json(users);
