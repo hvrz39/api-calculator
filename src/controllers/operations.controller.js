@@ -8,8 +8,8 @@ export const doOperation = async (req, res) => {
     try {    
 
         const { userId } = req;
-        const { balance } = await userBalanceService.getUserBalance(userId);   
-
+        const userBalance = await userBalanceService.getUserBalance(userId);   
+        const balance = userBalance ? userBalance.balance : 0;
         if(balance <=  0) {
             res.status(400).json({ error: `User does not have enough balance (${balance})`}) 
         }
