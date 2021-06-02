@@ -54,5 +54,18 @@ should display => Listenning on port 51044...
 ```
 http://localhost:51044/v1/api-docs/
 ```
+## Node Stack
+
+```javascript
+ - node
+ - express
+ - sequelize ORM (for migrations and soft delete)
+ - jwt 
+ - postgreSQL
+
+
+should display => Listenning on port 51044...
+```
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { hasAccessAndUser } from '../../middelwares';
 import { verifyToken, isUser } from '../../middelwares/auth.jwt';
 import * as myRecordCsontroller from '../../controllers/myrecord.controller';
 const router = Router();

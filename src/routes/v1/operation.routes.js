@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { hasAccessAndUser} from '../../middelwares/';
 import { doOperation } from '../../controllers/operations.controller';
+import { verifyToken, isUser } from '../../middelwares/auth.jwt';
 const router = Router();
 
-router.post('/', [hasAccessAndUser], doOperation);
+router.post('/', [verifyToken, isUser], doOperation);
 
 export default router;

@@ -5,10 +5,10 @@ import { verifyToken, isAdmin } from '../../middelwares/auth.jwt';
 const router = Router();
 const hasAccessAndAdmin = [verifyToken, isAdmin ];
 
-router.get('/', [], userController.getAll);
-router.get('/:id', [], userController.getById);
-router.post('/', [], userController.create);
-router.put('/:id', [], userController.update);
-router.delete('/:id', [], userController.remove);
+router.get('/', [verifyToken, isAdmin], userController.getAll);
+router.get('/:id', [verifyToken, isAdmin], userController.getById);
+router.post('/', [verifyToken, isAdmin], userController.create);
+router.put('/:id', [verifyToken, isAdmin], userController.update);
+router.delete('/:id', [verifyToken, isAdmin], userController.remove);
 
 export default router;
