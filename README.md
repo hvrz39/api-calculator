@@ -16,7 +16,7 @@ CREATE DATABASE operations;
 GRANT ALL PRIVILEGES ON DATABASE operations TO hromero; 
 ```
 
-Then execute the followin to install all dependencies
+Then execute the following to install all dependencies
 
 ```bash
 npm install
