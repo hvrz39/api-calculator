@@ -44,11 +44,11 @@ export const addUserBalance = async (req, res) => {
                     ['id', 'desc'],
                 ],
                 attributes: ['balance'],  
-                where: { 
-                    [Op.or]: [                      
-                        { balance:  isNaN(search) ? null : parseFloat(search) },                      
-                    ]
-                }              
+                // where: isNaN(search) ? null : { 
+                //     [Op.or]: [                      
+                //         { balance:  isNaN(search) ? 0 : parseFloat(search) },                      
+                //     ]
+                // }              
             }],
             where: { 
                     [Op.or]: [
@@ -58,7 +58,7 @@ export const addUserBalance = async (req, res) => {
                 } 
         });
        
-        const { rows, count } = userBalance;
+        const { rows, count } = userBalance;       
         const userBalances = fixUserBalance(rows);
         res.status(200).json({ rows: orderArray(userBalances, sort[0], sort[1]), count });
 

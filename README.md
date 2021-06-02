@@ -40,6 +40,12 @@ npm run dev
 
 should display => Listenning on port 51044...
 ```
-
+## Created Users
+```
+-username rzhoraciov@gmail.com -password 'admin' -role admin
+-username user1@tester.com -password 'user1' -role user
+-username user2@tester.com -password 'user2' -role user
+-username user3@tester.com -password 'user3' -role user
+```
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
