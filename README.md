@@ -62,9 +62,6 @@ http://localhost:51044/v1/api-docs/
  - sequelize ORM (for migrations and soft delete)
  - jwt 
  - postgreSQL
-
-
-should display => Listenning on port 51044...
 ```
 
 ## License
