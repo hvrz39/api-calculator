@@ -46,6 +46,13 @@ should display => Listenning on port 51044...
 -username user1@tester.com -password 'user1' -role user
 -username user2@tester.com -password 'user2' -role user
 -username user3@tester.com -password 'user3' -role user
+
+
+```
+
+## API documentation
+```
+http://localhost:51044/v1/api-docs/
 ```
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
