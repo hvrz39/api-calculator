@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "admin",
-    "database": "loanpro",
+    "username": "hromero",
+    "password": "hor@cio1",
+    "database": "operations",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
